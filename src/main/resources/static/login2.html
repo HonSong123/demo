@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" ng-app="loginApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-signin-client_id" content="45030722121-bcf1o6bubcr629q80fu8p31312t9du4r.apps.googleusercontent.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Trang Đăng Nhập</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="LoginController">
+
+<div class="container" id="container">
+    <div class="form-container sign-up" ng-if="!isInLoginMode">
+        <form ng-submit="register()">
+            <h1>Tạo tài khoản</h1>
+            <input type="text" placeholder="Tên đăng nhập" ng-model="registerData.username" required>
+            <input type="email" placeholder="Email" ng-model="registerData.email" required>
+            <input type="password" placeholder="Mật khẩu" ng-model="registerData.password" required ng-change="validatePassword()">
+
+            <!-- Success and error messages for registration -->
+            <div ng-show="successMessage" style="color: green; margin-top: 10px;">
+                {{ successMessage }}
+            </div>
+            <div ng-show="errorMessage" style="color: red; margin-top: 10px;">
+                {{ errorMessage }}
+            </div>
+            <div ng-show="passwordError" style="color: red; margin-top: 10px;">
+                {{ passwordError }}
+            </div>
+
+            <button type="submit" ng-disabled="passwordError">Đăng ký</button>
+        </form>
+    </div>
+    <div class="form-container sign-in" ng-if="isInLoginMode">
+        <form ng-submit="login()">
+            <h1>Đăng nhập</h1>
+            <div class="social-icons">
+              
+               <!-- Google Login Button -->
+               <a href="/login/oauth2/code/google" class="icon" >
+
+                    <i class="fa-brands fa-google-plus-g"></i>
+              
+                   
+                </a>
+                <a href="#" class="icon" ><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+            <span>Hoặc dùng tài khoản để đăng nhập</span>
+            <input id="username" ng-model="loginData.username" placeholder="Tên đăng nhập" required ng-change="validateUsername()">
+            <div ng-show="usernameError" style="color: red; margin-top: 10px;">
+                {{ usernameError }}
+            </div>
+            <input type="password" id="password" ng-model="loginData.password" placeholder="Mật khẩu" required ng-change="validatePassword1()">
+            <div ng-show="passwordError" style="color: red; margin-top: 10px;">
+                {{ passwordError }}
+            </div>
+            <a href="/forgotpass">Quên mật khẩu?</a>
+
+            <!-- Error Message Display -->
+            <div ng-show="errorMessage" style="color: red; margin-top: 10px;">
+                {{ errorMessage }}
+            </div>
+
+            <button type="submit" ng-disabled="usernameError || passwordError">Đăng nhập</button>
+        </form>
+    </div>
+    <div class="toggle-container">
+        <div class="toggle">
+            <div class="toggle-panel toggle-left">
+                <h1>Chào mừng trở lại!</h1>
+                <p>Nhập thông tin cá nhân của bạn để sử dụng tất cả các tính năng của trang web</p>
+                <button class="hidden" id="login" ng-click="setLoginMode(true)" ng-class="{'active': isInLoginMode}">Đăng nhập</button>
+            </div>
+            <div class="toggle-panel toggle-right">
+                <h1>Chào, bạn!</h1>
+                <p>Đăng ký với thông tin cá nhân của bạn để sử dụng tất cả các tính năng của trang web</p>
+                <button class="hidden" id="register" ng-click="setLoginMode(false)" ng-class="{'active': !isInLoginMode}">Đăng ký</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="assets/js/login.js"></script>
+<script>
+    var app = angular.module("loginApp", []);
+
+    app.controller("LoginController", function($scope, $http) {
+        // Khởi tạo dữ liệu đăng nhập và đăng ký
+        $scope.loginData = {
+            username: "",
+            password: ""
+        };
+        $scope.registerData = {
+            username: "",
+            email: "",
+            password: ""
+        };
+        $scope.isInLoginMode = true; // Chế độ mặc định là đăng nhập
+        $scope.errorMessage = null;
+        $scope.successMessage = null;
+        $scope.passwordError = null;
+
+        // Hàm để đặt chế độ đăng nhập hoặc đăng ký
+        $scope.setLoginMode = function(isLogin) {
+            $scope.isInLoginMode = isLogin;
+            $scope.errorMessage = null; // Xóa thông báo lỗi khi chuyển đổi
+            $scope.successMessage = null; // Xóa thông báo thành công khi chuyển đổi
+            $scope.passwordError = null; // Xóa thông báo lỗi mật khẩu khi chuyển đổi
+        };
+
+        // Hàm xác thực mật khẩu
+        $scope.validatePassword = function() {
+            const password = $scope.registerData.password;
+            const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/; // Ít nhất 1 chữ cái, 1 số, từ 8-16 ký tự
+            if (password.length < 8) {
+                $scope.passwordError = "Mật khẩu quá ngắn. Phải từ 8 đến 16 ký tự.";
+            } else if (password.length > 16) {
+                $scope.passwordError = "Mật khẩu quá dài. Phải từ 8 đến 16 ký tự.";
+            } else if (!regex.test(password)) {
+                $scope.passwordError = "Mật khẩu phải có ít nhất 1 chữ cái và 1 số.";
+            } else {
+                $scope.passwordError = null; // Mật khẩu hợp lệ
+            }
+        };
+
+        // Hàm đăng nhập
+        // Hàm đăng nhập
+        $scope.validateUsername = function() {
+            const username = $scope.loginData.username;
+            if (!username) {
+                $scope.usernameError = "Tên đăng nhập không được để trống.";
+
+            } else {
+                $scope.usernameError = null; // Tên đăng nhập hợp lệ
+            }
+        };
+
+        // Hàm xác thực mật khẩu
+        $scope.validatePassword1 = function() {
+            const password = $scope.loginData.password;
+            if (!password) {
+                $scope.passwordError = "Mật khẩu không được để trống.";
+
+            } else {
+                $scope.passwordError = null; // Mật khẩu hợp lệ
+            }
+        };
+
+        // Hàm đăng nhập
+        $scope.login = function() {
+            if ($scope.usernameError || $scope.passwordError) {
+                $scope.errorMessage = "Vui lòng sửa lỗi trước khi tiếp tục.";
+                return;
+            }
+
+            $http.post("/api/auth/login", $scope.loginData)
+                .then(function(response) {
+                    // Save customerId in sessionStorage
+                    sessionStorage.setItem('customerId', response.data.customerId);
+
+                    // Check the user's role
+                    if (response.data.role === 2) {
+                        // Redirect to homepage for customers
+                        window.location.href = "/"; // Home page
+                    } else if (response.data.role === 0 || response.data.role === 1) {
+                        // Redirect to employee/admin page for roles 0 and 1
+                        window.location.href = "/admin"; // Example: admin page
+                    }
+                })
+                .catch(function(error) {
+                    $scope.errorMessage = "Tên đăng nhập hoặc mật khẩu không đúng.";
+                });
+        };
+
+        // Hàm đăng ký
+        $scope.register = function() {
+            if ($scope.passwordError) {
+                $scope.errorMessage = "Vui lòng sửa lỗi mật khẩu trước khi đăng ký.";
+                return;
+            }
+            $http.post("/api/auth/register", $scope.registerData)
+                .then(function(response) {
+                    if (response.data.message.includes("vui lòng kiểm tra email")) {
+                        $scope.successMessage = response.data.message; // Thông báo xác minh
+                    } else {
+                        $scope.successMessage = "Đăng ký thành công.";
+                    }
+                    $scope.errorMessage = null; // Xóa thông báo lỗi
+                })
+                .catch(function(error) {
+                    $scope.successMessage = null;
+                    $scope.errorMessage = error.data.message || "Đăng ký thất bại. Xin hãy thử lại.";
+                });
+        };
+
+        $scope.loginWithGoogle = function() {
+                // Trigger Google OAuth login
+                window.location.href = '/api/auth/login/oauth2/code/google';
+            };
+
+            // If logged in, update UI
+            if (sessionStorage.getItem('customerID')) {
+                // Change the login button to user icon
+                document.getElementById('google-login-btn').innerHTML = 'User Icon';
+            }
+
+//         $scope.handleGoogleLogin = function(event) {
+//     event.preventDefault();  // Ngăn hành động mặc định
+//     window.location.href = "/oauth2/authorization/google";  // Chuyển hướng đến trang đăng nhập Google
+// };
+
+// // Sau khi nhận được phản hồi thành công từ API Google
+// $http.get("/api/auth/google/login-success")
+//     .then(function(response) {
+//         // Lưu customerID vào sessionStorage
+//         const customerId = response.data.customerID;
+//         sessionStorage.setItem('customerId', customerId);
+
+//         // Điều hướng đến trang chủ
+//         window.location.href = "/";  // Điều hướng về trang chủ sau khi đăng nhập thành công
+//     })
+//     .catch(function(error) {
+//         console.error("Lỗi đăng nhập Google:", error.data);
+//         $scope.errorMessage = error.data || "Đăng nhập Google thất bại.";
+//     });
+
+
+
+      
+    });
+</script>
+</body>
+</html>

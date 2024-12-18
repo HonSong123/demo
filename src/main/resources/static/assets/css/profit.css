@@ -1,0 +1,223 @@
+:root {
+  --color-background: #4cb5c5;
+  --color-primary: #00d5d5;
+  --font-family-base: 'Poppins', sans-serif;
+  --font-size-h1: 1.5rem;
+  --font-size-h2: 1.25rem;
+}
+
+body {
+  background-color: var(--color-background);
+  font-family: var(--font-family-base);
+  line-height: 1.5;
+  margin: 0;
+  min-height: 100vh;
+  padding: 5vmin;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-section {
+  text-align: center;
+  padding: 2em;
+  background-color: #fff;
+  border-radius: 1.5em;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  transform: scale(1.1);
+  margin-top: 2em;
+}
+
+  .profile-image img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 0.5em;
+  }
+  
+  .profile-info {
+    text-align: left;
+    padding: 1em;
+  }
+  
+  .profile-info h2 {
+    font-size: var(--font-size-h1);
+    color: #333;
+    text-align: center;
+  }
+  
+  .profile-info p {
+    font-size: 1em;
+    color: #666;
+    margin: 0.25em 0;
+  }
+  
+  .edit-button {
+    margin-top: 1em;
+    padding: 0.75em 1.5em;
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: 0.5em;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .edit-button:hover {
+    background-color: #123c46;
+  }
+  
+  .dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  
+  .dialog {
+    background: #fff;
+    padding: 2em;
+    border-radius: 1em;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  .dialog h2 {
+    margin-bottom: 1em;
+    color: #333;
+  }
+  
+  .dialog label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.25em;
+    color: #333;
+    text-align: left;
+  }
+  
+  .dialog input,
+  .dialog select {
+    width: 100%;
+    margin-bottom: 1em;
+    padding: 0.75em;
+    border-radius: 0.5em;
+    font-size: 1em;
+    border: 1px solid #ddd;
+  }
+  
+  .save-button {
+    padding: 0.5em 2em;
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: 0.5em;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+.cancel-button {
+  padding: 0.5em 2em;
+  background-color: blue;
+  border: none;
+  border-radius: 0.5em;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+  .save-button:hover {
+    background-color: #e96363;
+  }
+
+.cancel-button:hover {
+  background-color: #e96363;
+}
+  
+.info-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2em 0;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 2em;
+  border-top: 1px solid #ddd;
+}
+
+.info-item {
+    text-align: center;
+    max-width: 200px;
+}
+
+.info-item .icon {
+    width: 60px;
+    height: 60px;
+    background-color: #333;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 1em auto;
+}
+
+.info-item .icon img {
+    width: 30px;
+    height: 30px;
+    filter: invert(1); /* Đổi màu icon thành màu trắng nếu hình ảnh là icon đen */
+}
+
+.info-item h3 {
+    font-size: 1.1rem;
+    color: #333;
+    margin: 0.5em 0;
+    font-weight: bold;
+}
+
+.info-item p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+}
+
+/* Căn chỉnh nút chỉnh sửa và nút đăng xuất */
+.edit-button, .logout-button {
+  margin: 1em 0.5em;
+}
+
+.logout-button {
+  padding: 0.75em 1.5em;
+  background-color: #000000; /* Màu nền cho nút đăng xuất */
+  border: none;
+  border-radius: 0.5em;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #ff0033; /* Màu nền khi hover */
+}
+
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex; /* Hiển thị box chỉnh sửa khi không bị ẩn */
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+/* AngularJS tự động thêm lớp ng-hide nếu ng-show = false */
+.ng-hide {
+  display: none !important; /* Đảm bảo phần tử bị ẩn hoàn toàn */
+}

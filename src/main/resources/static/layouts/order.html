@@ -1,0 +1,86 @@
+
+        <!--== Start Header Wrapper ==-->
+
+
+        <main class="main-content">
+
+            <!--== Start Page Header Area Wrapper ==-->
+            <nav aria-label="breadcrumb" class="breadcrumb-style1">
+                <div class="container">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Wishlist</li>
+                    </ol>
+                </div>
+            </nav>
+            <!--== End Page Header Area Wrapper ==-->
+
+            <!--== Start Wishlist Area Wrapper ==-->
+            <section class="section-space">
+                <div class="container">
+                    <div class="shopping-wishlist-form table-responsive">
+                        <form>
+                            <table class="table text-center">
+                                <thead>
+                                    <tr>
+                                        <th class="product-remove">&nbsp;</th>
+                                        <th class="product-thumbnail">&nbsp;</th>
+                                        <th class="product-name">Product name</th>
+                                        <th class="product-price">Tổng tiền</th>
+                                        <th class="product-stock-status">Trạng thái</th>
+                                        <th class="product-add-to-cart">&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="tbody-item" ng-repeat="order in orders">
+                                    <td class="product-remove">
+                                        <a class="remove" href="javascript:void(0)" ng-click="confirmCancel(order.orderid)" >x</a>
+                                    </td>
+                                    <td class="product-thumbnail" ng-repeat="detail in order.cart.cartDetails">
+                                        <div class="thumb">
+                                            <a href="single-product.html">
+                                                <img ng-src="/assets/products/{{ detail.product.productimage[0].image }}" width="68" height="84" alt="Image-HasTech">
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td class="product-name" ng-repeat="detail in order.cart.cartDetails">
+                                        <a class="title" href="single-product.html">{{detail.product.productname}}</a>
+                                    </td>
+                                    <td class="product-price" >
+                                        <span class="price">{{order.totalamount}}</span>
+                                    </td>
+                                    <td class="product-stock-status" >
+                                        <span class="wishlist-in-stock">{{order.deliverystatus}}</span>
+                                    </td>
+
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <!--== End Wishlist Area Wrapper ==-->
+
+        </main>
+
+        <!--== Start Footer Area Wrapper ==-->
+
+
+    <!-- JS Vendor, Plugins & Activation Script Files -->
+
+    <!-- Vendors JS -->
+    <script src="./assets/js/vendor/modernizr-3.11.7.min.js"></script>
+    <script src="./assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="./assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
+    <script src="./assets/js/vendor/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugins JS -->
+    <script src="./assets/js/plugins/swiper-bundle.min.js"></script>
+    <script src="./assets/js/plugins/fancybox.min.js"></script>
+    <script src="./assets/js/plugins/jquery.nice-select.min.js"></script>
+
+    <!-- Custom Main JS -->
+    <script src="./assets/js/main.js"></script>
+

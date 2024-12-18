@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{base::dynamic(~{::section})}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<body>
+	<section>
+		<div class="wrapper">
+
+			<main class="main-content">
+
+				<!--== Start Page Header Area Wrapper ==-->
+				<section class="page-header-area pt-10 pb-9" data-bg-color="#FFF3DA">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-5">
+								<div class="page-header-st3-content text-center text-md-start">
+									<ol
+										class="breadcrumb justify-content-center justify-content-md-start">
+										<li class="breadcrumb-item"><a class="text-dark"
+											href="index.html">Home</a></li>
+										<li class="breadcrumb-item active text-dark"
+											aria-current="page">Blog</li>
+									</ol>
+									<h2 class="page-header-title">All Blog</h2>
+								</div>
+							</div>
+							<div class="col-md-7">
+								<h5
+									class="showing-pagination-results mt-5 mt-md-9 text-center text-md-end">Showing
+									20 Results</h5>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!--== End Page Header Area Wrapper ==-->
+
+				<!--== Start Blog Area Wrapper ==-->
+				<section class="section-space pb-0">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+								<div class="section-title text-center">
+									<h2 class="title">New Posts</h2>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit
+										ut aliquam, purus sit amet luctus venenatis</p>
+								</div>
+							</div>
+						</div>
+						<div class="row mb-n9">
+							<div class="col-sm-6 col-lg-4 mb-8">
+								<!--== Start Blog Item ==-->
+								<div class="post-item">
+									<a th:href="@{/blog-details}" class="thumb"> <img
+										src="assets/images/blog/1.webp" width="370" height="320"
+										alt="Image-HasTech">
+									</a>
+									<div class="content">
+										<a class="post-category" th:href="@{/blog}">beauty</a>
+										<h4 class="title">
+											<a th:href="@{/blog-details}">Lorem ipsum dolor sit amet
+												consectetur adipiscing.</a>
+										</h4>
+										<ul class="meta">
+											<li class="author-info"><span>By:</span> <a
+												th:href="@{/blog}">Tomas De Momen</a></li>
+											<li class="post-date">February 13, 2022</li>
+										</ul>
+									</div>
+								</div>
+								<!--== End Blog Item ==-->
+							</div>
+							<div class="col-sm-6 col-lg-4 mb-8">
+								<!--== Start Blog Item ==-->
+								<div class="post-item">
+									<a th:href="@{/blog-details}" class="thumb"> <img
+										src="assets/images/blog/4.webp" width="370" height="320"
+										alt="Image-HasTech">
+									</a>
+									<div class="content">
+										<a class="post-category post-category-two"
+											data-bg-color="#A49CFF" th:href="@{/blog}">beauty</a>
+										<h4 class="title">
+											<a th:href="@{/blog-details}">Benefit of Hot Ston Spa for
+												your health & life.</a>
+										</h4>
+										<ul class="meta">
+											<li class="author-info"><span>By:</span> <a
+												th:href="@{/blog}">Tomas De Momen</a></li>
+											<li class="post-date">February 13, 2022</li>
+										</ul>
+									</div>
+								</div>
+								<!--== End Blog Item ==-->
+							</div>
+							<div class="col-sm-12 col-lg-4 mb-8">
+								<div class="row mb-n10">
+									<div class="col-md-6  col-lg-12 mb-10">
+										<!--== Start Blog Item ==-->
+										<div class="post-item">
+											<div class="content">
+												<h4 class="title mt-0">
+													<a th:href="@{/blog-details}">Lorem ipsum dolor sit amet,
+														consectetur adipiscing</a>
+												</h4>
+												<p class="desc">Lorem ipsum dolor sit amet, conseur
+													adipiscing elit ut aliqua, purus sit amet luctus venenatis.</p>
+												<a class="btn-link" th:href="@{/blog}">Learn more</a>
+											</div>
+										</div>
+										<!--== End Blog Item ==-->
+									</div>
+									<div class="col-md-6  col-lg-12 mb-10 pt-0 pt-lg-4">
+										<!--== Start Blog Item ==-->
+										<div class="post-item">
+											<div class="content">
+												<h4 class="title mt-0">
+													<a th:href="@{/blog-details}">Facial Scrub is natural
+														treatment for face.</a>
+												</h4>
+												<p class="desc">Lorem ipsum dolor sit amet, conseur
+													adipiscing elit ut aliqua, purus.</p>
+												<a class="btn-link" th:href="@{/blog}">Learn more</a>
+											</div>
+										</div>
+										<!--== End Blog Item ==-->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!--== End Blog Area Wrapper ==-->
+
+				<!--== Start Blog Area Wrapper ==-->
+				<section class="section-space">
+					<div class="container">
+						<div class="row mb-n9">
+							<div class="col-sm-6 mb-8">
+								<!--== Start Blog Item ==-->
+								<div class="post-item">
+									<a th:href="@{/blog-details}" class="thumb"> <img
+										src="assets/images/blog/col6-1.webp" width="570" height="340"
+										alt="Image-HasTech">
+									</a>
+									<div class="content">
+										<h4 class="title">
+											<a th:href="@{/blog-details}">Facial Scrub is natural
+												treatment for face.</a>
+										</h4>
+										<p class="desc">Lorem ipsum dolor sit amet, conseur
+											adipiscing elit ut aliqua, purus sit amet luctus venenatis.</p>
+										<ul class="meta">
+											<li class="author-info"><span>By:</span> <a
+												th:href="@{/blog}">Tomas De Momen</a></li>
+											<li class="post-date">February 13, 2022</li>
+										</ul>
+									</div>
+								</div>
+								<!--== End Blog Item ==-->
+							</div>
+							<div class="col-sm-6 mb-8">
+								<!--== Start Blog Item ==-->
+								<div class="post-item">
+									<a th:href="@{/blog-details}" class="thumb"> <img
+										src="assets/images/blog/col6-2.webp" width="570" height="340"
+										alt="Image-HasTech">
+									</a>
+									<div class="content">
+										<h4 class="title">
+											<a th:href="@{/blog-details}">Benefit of Hot Ston Spa for
+												your health</a>
+										</h4>
+										<p class="desc">Lorem ipsum dolor sit amet, conseur
+											adipiscing elit ut aliqua, purus sit amet luctus venenatis.</p>
+										<ul class="meta">
+											<li class="author-info"><span>By:</span> <a
+												th:href="@{/blog}">Tomas De Momen</a></li>
+											<li class="post-date">February 13, 2022</li>
+										</ul>
+									</div>
+								</div>
+								<!--== End Blog Item ==-->
+							</div>
+						</div>
+					</div>
+				</section>
+				<!--== End Blog Area Wrapper ==-->
+
+				<!--== Start Blog Area Wrapper ==-->
+				<section class="section-space pt-0">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+								<div class="section-title text-center">
+									<h2 class="title">Others Posts</h2>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit
+										ut aliquam, purus sit amet luctus venenatis</p>
+								</div>
+							</div>
+						</div>
+						<div class="row mb-n9">
+							<div class="col-sm-6 col-lg-4 mb-8">
+								<!--== Start Blog Item ==-->
+								<div class="post-item">
+									<a th:href="@{/blog-details}" class="thumb"> <img
+										src="assets/images/blog/1.webp" width="370" height="320"
+										alt="Image-HasTech">
+									</a>
+									<div class="content">
+										<a class="post-category" th:href="@{/blog}">beauty</a>
+										<h4 class="title">
+											<a th:href="@{/blog-details}">Lorem ipsum dolor sit amet
+												consectetur adipiscing.</a>
+										</h4>
+										<ul class="meta">
+											<li class="author-info"><span>By:</span> <a
+												th:href="@{/blog}">Tomas De Momen</a></li>
+											<li class="post-date">February 13, 2022</li>
+										</ul>
+									</div>
+								</div>
+								<!--== End Blog Item ==-->
+							</div>
+							<div class="col-sm-6 col-lg-4 mb-8">
+								<!--== Start Blog Item ==-->
+								<div class="post-item">
+									<a th:href="@{/blog-details}" class="thumb"> <img
+										src="assets/images/blog/2.webp" width="370" height="320"
+										alt="Image-HasTech">
+									</a>
+									<div class="content">
+										<a class="post-category post-category-two"
+											data-bg-color="#A49CFF" th:href="@{/blog}">beauty</a>
+										<h4 class="title">
+											<a th:href="@{/blog-details}">Lorem ipsum dolor sit amet
+												consectetur adipiscing.</a>
+										</h4>
+										<ul class="meta">
+											<li class="author-info"><span>By:</span> <a
+												th:href="@{/blog}">Tomas De Momen</a></li>
+											<li class="post-date">February 13, 2022</li>
+										</ul>
+									</div>
+								</div>
+								<!--== End Blog Item ==-->
+							</div>
+							<div class="col-sm-6 col-lg-4 mb-8">
+								<!--== Start Blog Item ==-->
+								<div class="post-item">
+									<a th:href="@{/blog-details}" class="thumb"> <img
+										src="assets/images/blog/3.webp" width="370" height="320"
+										alt="Image-HasTech">
+									</a>
+									<div class="content">
+										<a class="post-category post-category-three"
+											data-bg-color="#9CDBFF" th:href="@{/blog}">beauty</a>
+										<h4 class="title">
+											<a th:href="@{/blog-details}">Lorem ipsum dolor sit amet
+												consectetur adipiscing.</a>
+										</h4>
+										<ul class="meta">
+											<li class="author-info"><span>By:</span> <a
+												th:href="@{/blog}">Tomas De Momen</a></li>
+											<li class="post-date">February 13, 2022</li>
+										</ul>
+									</div>
+								</div>
+								<!--== End Blog Item ==-->
+							</div>
+							<div class="col-sm-6 col-lg-4 mb-8">
+								<!--== Start Blog Item ==-->
+								<div class="post-item">
+									<a th:href="@{/blog-details}" class="thumb"> <img
+										src="assets/images/blog/5.webp" width="370" height="320"
+										alt="Image-HasTech">
+									</a>
+									<div class="content">
+										<a class="post-category" th:href="@{/blog}">beauty</a>
+										<h4 class="title">
+											<a th:href="@{/blog-details}">Lorem ipsum dolor sit amet
+												consectetur adipiscing.</a>
+										</h4>
+										<ul class="meta">
+											<li class="author-info"><span>By:</span> <a
+												th:href="@{/blog}">Tomas De Momen</a></li>
+											<li class="post-date">February 13, 2022</li>
+										</ul>
+									</div>
+								</div>
+								<!--== End Blog Item ==-->
+							</div>
+							<div class="col-sm-6 col-lg-4 mb-8">
+								<!--== Start Blog Item ==-->
+								<div class="post-item">
+									<a th:href="@{/blog-details}" class="thumb"> <img
+										src="assets/images/blog/6.webp" width="370" height="320"
+										alt="Image-HasTech">
+									</a>
+									<div class="content">
+										<a class="post-category post-category-two"
+											data-bg-color="#A49CFF" th:href="@{/blog}">beauty</a>
+										<h4 class="title">
+											<a th:href="@{/blog-details}">Lorem ipsum dolor sit amet
+												consectetur adipiscing.</a>
+										</h4>
+										<ul class="meta">
+											<li class="author-info"><span>By:</span> <a
+												th:href="@{/blog}">Tomas De Momen</a></li>
+											<li class="post-date">February 13, 2022</li>
+										</ul>
+									</div>
+								</div>
+								<!--== End Blog Item ==-->
+							</div>
+							<div class="col-sm-6 col-lg-4 mb-8">
+								<!--== Start Blog Item ==-->
+								<div class="post-item">
+									<a th:href="@{/blog-details}" class="thumb"> <img
+										src="assets/images/blog/7.webp" width="370" height="320"
+										alt="Image-HasTech">
+									</a>
+									<div class="content">
+										<a class="post-category post-category-three"
+											data-bg-color="#9CDBFF" th:href="@{/blog}">beauty</a>
+										<h4 class="title">
+											<a th:href="@{/blog-details}">Lorem ipsum dolor sit amet
+												consectetur adipiscing.</a>
+										</h4>
+										<ul class="meta">
+											<li class="author-info"><span>By:</span> <a
+												th:href="@{/blog}">Tomas De Momen</a></li>
+											<li class="post-date">February 13, 2022</li>
+										</ul>
+									</div>
+								</div>
+								<!--== End Blog Item ==-->
+							</div>
+						</div>
+					</div>
+				</section>
+				<!--== End Blog Area Wrapper ==-->
+
+				<!--== Start Product Banner Area Wrapper ==-->
+				<section class="section-space pt-0">
+					<div class="container">
+						<div class="row justify-content-center">
+							<div class="col-sm-10 col-lg-8">
+								<!--== Start Product Category Item ==-->
+								<a href="product.html" class="product-banner-item"> <img
+									src="assets/images/shop/banner/8.webp" width="770" height="250"
+									alt="Image-HasTech">
+								</a>
+								<!--== End Product Category Item ==-->
+							</div>
+						</div>
+					</div>
+				</section>
+				<!--== End Product Banner Area Wrapper ==-->
+
+				<!--== Start Blog Area Wrapper ==-->
+				<section class="section-space pt-0">
+					<div class="container">
+						<div class="row mb-n9">
+							<div class="col-sm-6 col-lg-4 mb-8">
+								<!--== Start Blog Item ==-->
+								<div class="post-item">
+									<a th:href="@{/blog-details}" class="thumb"> <img
+										src="assets/images/blog/1.webp" width="370" height="320"
+										alt="Image-HasTech">
+									</a>
+									<div class="content">
+										<a class="post-category" th:href="@{/blog}">beauty</a>
+										<h4 class="title">
+											<a th:href="@{/blog-details}">Lorem ipsum dolor sit amet
+												consectetur adipiscing.</a>
+										</h4>
+										<ul class="meta">
+											<li class="author-info"><span>By:</span> <a
+												th:href="@{/blog}">Tomas De Momen</a></li>
+											<li class="post-date">February 13, 2022</li>
+										</ul>
+									</div>
+								</div>
+								<!--== End Blog Item ==-->
+							</div>
+							<div class="col-sm-6 col-lg-4 mb-8">
+								<!--== Start Blog Item ==-->
+								<div class="post-item">
+									<a th:href="@{/blog-details}" class="thumb"> <img
+										src="assets/images/blog/2.webp" width="370" height="320"
+										alt="Image-HasTech">
+									</a>
+									<div class="content">
+										<a class="post-category post-category-two"
+											data-bg-color="#A49CFF" th:href="@{/blog}">beauty</a>
+										<h4 class="title">
+											<a th:href="@{/blog-details}">Lorem ipsum dolor sit amet
+												consectetur adipiscing.</a>
+										</h4>
+										<ul class="meta">
+											<li class="author-info"><span>By:</span> <a
+												th:href="@{/blog}">Tomas De Momen</a></li>
+											<li class="post-date">February 13, 2022</li>
+										</ul>
+									</div>
+								</div>
+								<!--== End Blog Item ==-->
+							</div>
+							<div class="col-sm-6 col-lg-4 mb-8">
+								<!--== Start Blog Item ==-->
+								<div class="post-item">
+									<a th:href="@{/blog-details}" class="thumb"> <img
+										src="assets/images/blog/3.webp" width="370" height="320"
+										alt="Image-HasTech">
+									</a>
+									<div class="content">
+										<a class="post-category post-category-three"
+											data-bg-color="#9CDBFF" th:href="@{/blog}">beauty</a>
+										<h4 class="title">
+											<a th:href="@{/blog-details}">Lorem ipsum dolor sit amet
+												consectetur adipiscing.</a>
+										</h4>
+										<ul class="meta">
+											<li class="author-info"><span>By:</span> <a
+												th:href="@{/blog}">Tomas De Momen</a></li>
+											<li class="post-date">February 13, 2022</li>
+										</ul>
+									</div>
+								</div>
+								<!--== End Blog Item ==-->
+							</div>
+						</div>
+					</div>
+				</section>
+				<!--== End Blog Area Wrapper ==-->
+
+				<!--== Start News Letter Area Wrapper ==-->
+				<section class="section-space pt-0">
+					<div class="container">
+						<div class="newsletter-content-wrap"
+							data-bg-img="assets/images/photos/bg1.webp">
+							<div class="newsletter-content">
+								<div class="section-title mb-0">
+									<h2 class="title">Join with us</h2>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit
+										ut aliquam.</p>
+								</div>
+							</div>
+							<div class="newsletter-form">
+								<form>
+									<input type="email" class="form-control"
+										placeholder="enter your email">
+									<button class="btn-submit" type="submit">
+										<i class="fa fa-paper-plane"></i>
+									</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!--== End News Letter Area Wrapper ==-->
+			</main>
+
+		</div>
+	</section>
+</body>
+</html>

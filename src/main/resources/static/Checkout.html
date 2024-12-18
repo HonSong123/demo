@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="productApp">
+<head>
+    <title>Thanh Toán</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="ProductController">
+    <h1>Thông Tin Thanh Toán</h1>
+
+        <h1>Checkout Information</h1>
+    
+        <!-- Display selected products -->
+        <h3>Selected Products</h3>
+        <div ng-repeat="product in selectedProducts">
+            <p>{{ product.productName }}</p>
+            <p>Quantity: {{ product.quantity }}</p>
+            <p>Price: {{ product.price }}</p>
+            
+        </div>
+    
+        <!-- Display customer information form -->
+        
+        <form id="checkoutForm">
+            <h3>Customer Information</h3>
+        
+            <!-- Success and Error Messages -->
+            <div ng-if="successMessage" style="color: green; margin-bottom: 10px;">
+                {{ successMessage }}
+            </div>
+            <div ng-if="errorMessage" style="color: red; margin-bottom: 10px;">
+                {{ errorMessage }}
+            </div>
+        
+            <input type="text" ng-model="customer.customername" placeholder="Name">
+            <input type="text" ng-model="customer.address" placeholder="Address">
+            <input type="text" ng-model="customer.phone" placeholder="Phone">
+            <input type="email" ng-model="customer.email" placeholder="Email">
+        
+            <button type="button" ng-click="updateCustomerInfo()">Update Information</button>
+        </form>
+    
+        <!-- Payment Method Selection -->
+        <h3>Payment Method</h3>
+        <select ng-model="paymentMethod">
+            <option value="cash">Cash</option>
+            <option value="card">Card</option>
+        </select>
+    
+        <button ng-click="checkout()">Proceed to Payment</button>
+    </form>
+
+</body>
+
+<script src="@{/assets/app.js}"></script>
+
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ProfileApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="/assets/css/profit.css">
+</head>
+<body ng-controller="ProfileController">
+<div class="iphone">
+    <!-- User Profile Section -->
+    <div class="profile-section">
+        <div class="profile-image">
+            <img src="/assets/images/user.webp" alt="User Avatar">
+        </div>
+        <div class="profile-info">
+            <h2>{{ customer.customername }}</h2>
+            <p>Ngày sinh: <span>{{ customer.birthdate | date:'dd/MM/yyyy' }}</span></p>
+            <p>Giới tính: <span>{{ customer.gender == 0 ? 'Nam' : 'Nữ' }}</span></p>
+            <p>Địa chỉ: <span>{{ customer.address }}</span></p>
+            <p>Đơn hàng hiện có: <span>{{ customer.orders || 0 }}</span></p>
+        </div>
+        <button class="button edit-button" ng-click="editProfile()">Chỉnh sửa</button>
+        <button class="button logout-button" href="#!cart">Trở lại</button>
+    </div>
+
+    <!-- Dialog for Editing Profile -->
+    <div class="dialog-overlay" ng-show="isEditing">
+        <div class="dialog">
+            <h2>Edit Profile</h2>
+            <label for="nameInput">Họ và tên</label>
+            <input type="text" id="nameInput" placeholder="Name" ng-model="editableProfile.customername">
+
+            <label for="dobInput">Ngày sinh</label>
+            <input type="date" id="dobInput" ng-model="editableProfile.birthdate">
+
+            <label for="emailInput">Email</label>
+            <input type="email" id="emailInput" ng-model="editableProfile.email">
+
+            <label for="phoneInput">Số điện thoại</label>
+            <input type="text" id="phoneInput" ng-model="editableProfile.phone">
+
+            <label for="genderInput">Giới tính</label>
+            <select id="genderInput" ng-model="editableProfile.gender">
+                <option value="false">Nam</option>
+                <option value="true">Nữ</option>
+            </select>
+
+            <label for="addressInput">Địa chỉ</label>
+            <input type="text" id="addressInput" placeholder="Address" ng-model="editableProfile.address">
+
+            <button class="button save-button" ng-click="saveProfile()">Lưu</button>
+            <button class="button cancel-button" ng-click="cancelEdit()">Hủy</button>
+        </div>
+    </div>
+</div>
+
+<!-- Additional Information Section -->
+<div class="info-section">
+    <div class="info-item" ng-repeat="info in additionalInfo">
+        <div class="icon">
+            <img ng-src="{{ info.icon }}" alt="{{ info.title }} Icon">
+        </div>
+        <h3>{{ info.title }}</h3>
+        <p>{{ info.description }}</p>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<script>
+    const app = angular.module('ProfileApp', []);
+
+    app.controller('ProfileController', function ($scope, $http) {
+        $scope.customer = {};
+        $scope.successMessage = "";
+        $scope.errorMessage = "";
+
+        // Load Customer Information
+        $scope.loadCustomerInfo = function() {
+            const customerId = sessionStorage.getItem('customerId');
+            $http.get(`/api/customer/${customerId}`)
+                .then(function(response) {
+                    $scope.customer = response.data;
+                    if ($scope.customer.birthdate) {
+                        $scope.customer.birthdate = new Date($scope.customer.birthdate);
+                    }
+                })
+                .catch(function(error) {
+                    console.error("Error loading customer information:", error);
+                });
+        };
+
+        // Save Customer Profile
+        $scope.saveProfile = function() {
+            // Tạo object chỉ chứa các trường cần cập nhật
+            const updatedProfile = {
+                customerID: $scope.editableProfile.customerID,
+                customername: $scope.editableProfile.customername,
+                birthdate: $scope.editableProfile.birthdate,
+                email: $scope.editableProfile.email,
+                phone: $scope.editableProfile.phone,
+                gender: $scope.editableProfile.gender,
+                address: $scope.editableProfile.address
+            };
+
+            $http.put(`/api/customer/update`, updatedProfile)
+                .then(function(response) {
+                    $scope.successMessage = "Thông tin khách hàng đã được cập nhật thành công!";
+                    $scope.errorMessage = "";
+                    $scope.customer = response.data; // Cập nhật thông tin hiển thị
+                    $scope.isEditing = false; // Đóng cửa sổ chỉnh sửa
+                })
+                .catch(function(error) {
+                    $scope.errorMessage = "Cập nhật thông tin khách hàng thất bại.";
+                    $scope.successMessage = "";
+                    console.error("Lỗi cập nhật thông tin khách hàng:", error);
+                });
+        };
+
+
+        // Cancel Edit
+        $scope.cancelEdit = function() {
+            $scope.isEditing = false; // Close dialog without saving
+        };
+
+        $scope.isEditing = false;
+
+        // Edit Profile
+        $scope.editProfile = function() {
+            $scope.isEditing = true;
+            $scope.editableProfile = angular.copy($scope.customer);
+        };
+
+        // Load Customer Info on Init
+        $scope.loadCustomerInfo();
+
+        // Additional Info
+        $scope.additionalInfo = [
+            { icon: '/assets/images/truck.png', title: 'MIỄN PHÍ GIAO HÀNG', description: 'Miễn Phí Giao Hàng Với Hoá Đơn Trên 900.000đ' },
+            { icon: '/assets/images/box.png', title: '3 NGÀY ĐỔI SẢN PHẨM', description: 'Đổi Sản Phẩm Trong 3 Ngày' },
+            { icon: '/assets/images/phone.png', title: 'HOTLINE', description: 'Mua Hàng Online: 0123.456.789' },
+            { icon: '/assets/images/store.png', title: 'THỬ TẠI STORE', description: 'Địa Chỉ: Phường 10, Quận Bình Thạnh, TP HCM' },
+        ];
+    });
+</script>
+</body>
+</html>

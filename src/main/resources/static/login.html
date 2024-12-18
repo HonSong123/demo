@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Login</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+</head>
+<body ng-app="myApp" ng-controller="LoginController">
+
+  <!-- Button Google Sign-In -->
+  <div id="g-signin2" data-onsuccess="onSignIn"></div>
+
+  <script>
+    var app = angular.module('myApp', []);
+
+    app.controller('LoginController', function($scope, $http) {
+
+      // Hàm xử lý đăng nhập Google
+      $scope.onSignIn = function(googleUser) {
+        var idToken = googleUser.getAuthResponse().id_token;
+
+        // Gửi token tới backend để xác thực
+        $scope.loginWithGoogle(idToken);
+      };
+
+      // Gửi token đến backend
+      $scope.loginWithGoogle = function(idToken) {
+        // Thực hiện HTTP POST request để gửi token lên server
+        $http.post('http://localhost:8080/api/auth/google-login', { idToken: idToken })
+          .then(function(response) {
+            console.log('Login successful', response);
+            // Xử lý khi đăng nhập thành công
+            // Ví dụ: Lưu token hoặc thực hiện chuyển hướng
+          })
+          .catch(function(error) {
+            console.log('Login failed', error);
+          });
+      };
+    });
+  </script>
+
+</body>
+</html>

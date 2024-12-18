@@ -1,0 +1,90 @@
+
+
+
+
+
+                <!--== Start Header Wrapper ==-->
+
+                <!--== End Header Wrapper ==-->
+        
+                <main class="main-content">
+
+                    <section class="page-header-area pt-10 pb-9" data-bg-color="#FFF3DA">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="page-header-st3-content text-center text-md-start">
+                                        <ol class="breadcrumb justify-content-center justify-content-md-start">
+                                            <li class="breadcrumb-item"><a class="text-dark" href="index.html">Home</a></li>
+                                            <li class="breadcrumb-item active text-dark" aria-current="page">Account</li>
+                                        </ol>
+                                        <h2 class="page-header-title">Account</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!--== End Page Header Area Wrapper ==-->
+        
+                    <!--== Start Account Area Wrapper ==-->
+                    <section class="section-space">
+                        <div class="container">
+                            <div class="row mb-n8">
+                                <div class="col-lg-6 mb-8">
+                                    <!--== Start Login Area Wrapper ==-->
+                                    <h3 class="page-header-title">Đổi mật khẩu</h3>
+                                    <div class="my-account-item-wrap">
+                                        <h3 class="title">Đổi mật khẩu</h3>
+                                        <div class="my-account-form">
+                                            <form ng-submit="changePassword()">
+                                                <div class="form-group mb-6">
+                                                    <label for="oldPassword">Old password <sup>*</sup></label>
+                                                    <input type="password" id="oldPassword" ng-model="oldPassword" required>
+                                                </div>
+
+                                                <div class="form-group mb-6">
+                                                    <label for="newPassword">New Password <sup>*</sup></label>
+                                                    <input type="password" id="newPassword" ng-model="newPassword" required>
+                                                </div>
+
+                                                <div class="form-group mb-6">
+                                                    <label for="confirmPassword">Confirm Password <sup>*</sup></label>
+                                                    <input type="password" id="confirmPassword" ng-model="confirmPassword" required>
+                                                </div>
+                                                <div id="alertContainer" ng-if="alert.message" class="alert alert-{{alert.type}} alert-dismissible fade show" role="alert">
+                                                    {{ alert.message }}
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>
+
+
+                                                <div class="form-group d-flex align-items-center mb-14">
+                                                    <button class="btn" type="submit">Submit</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                </div>
+                                    <!--== End Login Area Wrapper ==-->
+                                </div>
+
+                                    <!--== End Register Area Wrapper ==-->
+                                </div>
+                            </div>
+
+                    </section>
+                    <!--== End Account Area Wrapper ==-->
+        
+                </main>
+                <script src="./assets/js/vendor/modernizr-3.11.7.min.js"></script>
+                <script src="./assets/js/vendor/jquery-3.6.0.min.js"></script>
+                <script src="./assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
+                <script src="./assets/js/vendor/bootstrap.bundle.min.js"></script>
+
+                <!-- Plugins JS -->
+                <script src="./assets/js/plugins/swiper-bundle.min.js"></script>
+                <script src="./assets/js/plugins/fancybox.min.js"></script>
+                <script src="./assets/js/plugins/jquery.nice-select.min.js"></script>
+
+                <!-- Custom Main JS -->
+                <script src="./assets/js/main.js"></script>
+                <!--== Start Footer Area Wrapper ==-->
+

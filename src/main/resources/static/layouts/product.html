@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="productApp">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+
+		.price-filter {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			margin-top: 20px;
+		}
+
+		.price-input {
+			width: 100px;
+			padding: 8px 12px;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			font-size: 14px;
+			transition: all 0.3s ease;
+		}
+
+		.price-input:focus {
+			outline: none;
+			border-color: #007bff;
+			box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+		}
+
+		.filter-button {
+			padding: 10px 20px;
+			background-color: #007bff;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			font-size: 14px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+		.filter-button:hover {
+			background-color: #0056b3;
+		}
+
+		.filter-button:active {
+			background-color: #004085;
+			transform: scale(0.98);
+		}
+
+	</style>
+</head>
+
+<body>
+	<section>
+		<div class="wrapper">
+
+			<main class="main-content" ng-controller="ProductController">
+
+				<!--== Start Page Header Area Wrapper ==-->
+				<section class="page-header-area pt-10 pb-9" data-bg-color="#FFF3DA">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-5">
+								<div class="page-header-st3-content text-center text-md-start">
+									<ol class="breadcrumb justify-content-center justify-content-md-start">
+										<li class="breadcrumb-item"><a class="text-dark" href="index.html">Home</a></li>
+										<li class="breadcrumb-item active text-dark" aria-current="page">Products</li>
+									</ol>
+									<h2 class="page-header-title">All Products</h2>
+								</div>
+							</div>
+							<div class="col-md-7" ng-if="totalProducts !== undefined">
+								<h5 class="showing-pagination-results mt-5 mt-md-9 text-center text-md-end" >Showing
+									{{ totalProducts }} Kết quả</h5>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!--== End Page Header Area Wrapper ==-->
+
+				<!--== Start Product Area Wrapper ==-->
+				<section class="section-space">
+					<div class="container">
+						<div class="row justify-content-between flex-xl-row-reverse">
+							<div class="col-xl-9">
+								<div class="row g-3 g-sm-6">
+									<div class="col-6 col-lg-4 col-xl-4 mb-4 mb-sm-8 " ng-repeat="product in products" >
+										<!--== Start Product Item ==-->
+										<div class="product-item product-st3-item">
+											<div class="product-thumb">
+												<a class="d-block" th:href="product-details" href="#!/product/{{ product.productID }}"> <img
+														ng-src="/assets/products/{{ product.productimage[0].image }}"
+														class="card-img-top" alt="Product Image">
+
+												</a> <span class="flag-new">new</span>
+												<div class="product-action">
+													<button type="button"
+														class="product-action-btn action-btn-quick-view"
+														data-bs-toggle="modal" data-bs-target="#action-QuickViewModal">
+														<i class="fa fa-expand"></i>
+													</button>
+													<button type="button" class="product-action-btn action-btn-cart"
+														data-bs-toggle="modal" data-bs-target="#action-CartAddModal"
+														ng-click="addProductToCart(product)">
+														<span>Add to cart</span>
+													</button>
+													<button type="button" class="product-action-btn action-btn-wishlist"
+														data-bs-toggle="modal" data-bs-target="#action-WishlistModal">
+														<i class="fa fa-heart-o"></i>
+													</button>
+												</div>
+											</div>
+											<div class="product-info">
+												<div class="product-rating">
+													<div class="rating">
+														<i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
+														<i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
+														<i class="fa fa-star-half-o"></i>
+													</div>
+													<div class="reviews">150 reviews</div>
+												</div>
+												<h4 class="title">
+													<a th:href="product-details">{{ product.productname }}</a>
+												</h4>
+												<div class="prices">
+													<span class="price">{{ product.price }}</span>
+
+												</div>
+											</div>
+											<div class="product-action-bottom">
+												<button type="button" class="product-action-btn action-btn-quick-view"
+													data-bs-toggle="modal" data-bs-target="#action-QuickViewModal">
+													<i class="fa fa-expand"></i>
+												</button>
+												<button type="button" class="product-action-btn action-btn-wishlist"
+													data-bs-toggle="modal" data-bs-target="#action-WishlistModal">
+													<i class="fa fa-heart-o"></i>
+												</button>
+												<button type="button" class="product-action-btn action-btn-cart"
+													data-bs-toggle="modal" data-bs-target="#action-CartAddModal" ng-click="addProductToCart(product)">
+													<span>Add to cart</span>
+												</button>
+											</div>
+										</div>
+										<!--== End prPduct Item ==-->
+									</div>
+
+									<div class="col-12">
+										<ul class="pagination justify-content-center me-auto ms-auto mt-5 mb-10">
+											<li class="page-item"><a class="page-link previous" href="product.html"
+													aria-label="Previous"> <span class="fa fa-chevron-left"
+														aria-hidden="true"></span>
+												</a></li>
+											<li class="page-item"><a class="page-link" href="product.html">01</a></li>
+											<li class="page-item"><a class="page-link" href="product.html">02</a></li>
+											<li class="page-item"><a class="page-link" href="product.html">03</a></li>
+											<li class="page-item"><a class="page-link" href="product.html">....</a></li>
+											<li class="page-item"><a class="page-link next" href="product.html"
+													aria-label="Next"> <span class="fa fa-chevron-right"
+														aria-hidden="true"></span>
+												</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-3">
+								<div class="product-sidebar-widget">
+									<div class="product-widget-search">
+										<form >
+											<input type="search" ng-model="searchKeyword"  placeholder="Search Here">
+											<button type="submit" ng-click="searchProducts(searchKeyword, selectedCategory)">
+												<i class="fa fa-search"></i>
+											</button>
+										</form>
+									</div>
+									<div class="product-widget">
+
+									</div>
+									<div class="product-widget">
+										<h4 class="product-widget-title">Categories</h4>
+										<ul class="product-widget-category">
+											<li ng-repeat="category in categories"><a
+													ng-click="fetchProductsByCategory(category.categoryID)" ng-click="getTotalProductsByCategory(category.categoryID)"> {{
+													category.categoryName }}<span>({{ category.productCount
+														}})</span></a></li>
+
+										</ul>
+									</div>
+									<div class="price-filter">
+										<input type="number" ng-model="minPrice" placeholder="Min Price" class="price-input">
+										<input type="number" ng-model="maxPrice" placeholder="Max Price" class="price-input">
+
+									</div>
+									<button ng-click="filterByPrice()" class="filter-button">Filter by Price</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!--== End Product Area Wrapper ==-->
+
+				<!--== Start Product Banner Area Wrapper ==-->
+				<section>
+					<div class="container">
+						<!--== Start Product Category Item ==-->
+						<a href="product.html" class="product-banner-item"> <img src="assets/images/shop/banner/7.webp"
+								width="1170" height="240" alt="Image-HasTech">
+						</a>
+						<!--== End Product Category Item ==-->
+					</div>
+				</section>
+				<!--== End Product Banner Area Wrapper ==-->
+
+				<!--== Start Product Area Wrapper ==-->
+				<section class="section-space">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+								<div class="section-title">
+									<h2 class="title">Related Products</h2>
+									<p class="m-0">Lorem ipsum dolor sit amet, consectetur
+										adipiscing elit ut aliquam, purus sit amet luctus venenatis</p>
+								</div>
+							</div>
+						</div>
+						<div class="row mb-n10">
+							<div class="col-12">
+								<div class="swiper related-product-slide-container">
+									<div class="swiper-wrapper">
+										<div class="swiper-slide mb-8">
+											<!--== Start Product Item ==-->
+											<div class="product-item">
+												<div class="product-thumb">
+													<a class="d-block" th:href="product-details"> <img
+															src="assets/images/shop/4.webp" width="370" height="450"
+															alt="Image-HasTech">
+													</a> <span class="flag-new">new</span>
+													<div class="product-action">
+														<button type="button"
+															class="product-action-btn action-btn-quick-view"
+															data-bs-toggle="modal"
+															data-bs-target="#action-QuickViewModal">
+															<i class="fa fa-expand"></i>
+														</button>
+														<button type="button" class="product-action-btn action-btn-cart"
+															data-bs-toggle="modal"
+															data-bs-target="#action-CartAddModal">
+															<span>Add to cart</span>
+														</button>
+														<button type="button"
+															class="product-action-btn action-btn-wishlist"
+															data-bs-toggle="modal"
+															data-bs-target="#action-WishlistModal">
+															<i class="fa fa-heart-o"></i>
+														</button>
+													</div>
+												</div>
+												<div class="product-info">
+													<div class="product-rating">
+														<div class="rating">
+															<i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
+															<i class="fa fa-star-half-o"></i>
+														</div>
+														<div class="reviews">150 reviews</div>
+													</div>
+													<h4 class="title">
+														<a th:href="product-details">Readable content DX22</a>
+													</h4>
+													<div class="prices">
+														<span class="price">$210.00</span> <span
+															class="price-old">300.00</span>
+													</div>
+												</div>
+											</div>
+											<!--== End prPduct Item ==-->
+										</div>
+										<div class="swiper-slide mb-8">
+											<!--== Start Product Item ==-->
+											<div class="product-item">
+												<div class="product-thumb">
+													<a class="d-block" th:href="product-details"> <img
+															src="assets/images/shop/5.webp" width="370" height="450"
+															alt="Image-HasTech">
+													</a> <span class="flag-new">new</span>
+													<div class="product-action">
+														<button type="button"
+															class="product-action-btn action-btn-quick-view"
+															data-bs-toggle="modal"
+															data-bs-target="#action-QuickViewModal">
+															<i class="fa fa-expand"></i>
+														</button>
+														<button type="button" class="product-action-btn action-btn-cart"
+															data-bs-toggle="modal"
+															data-bs-target="#action-CartAddModal">
+															<span>Add to cart</span>
+														</button>
+														<button type="button"
+															class="product-action-btn action-btn-wishlist"
+															data-bs-toggle="modal"
+															data-bs-target="#action-WishlistModal">
+															<i class="fa fa-heart-o"></i>
+														</button>
+													</div>
+												</div>
+												<div class="product-info">
+													<div class="product-rating">
+														<div class="rating">
+															<i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
+															<i class="fa fa-star-half-o"></i>
+														</div>
+														<div class="reviews">150 reviews</div>
+													</div>
+													<h4 class="title">
+														<a th:href="product-details">Readable content DX22</a>
+													</h4>
+													<div class="prices">
+														<span class="price">$210.00</span> <span
+															class="price-old">300.00</span>
+													</div>
+												</div>
+											</div>
+											<!--== End prPduct Item ==-->
+										</div>
+										<div class="swiper-slide mb-8">
+											<!--== Start Product Item ==-->
+											<div class="product-item">
+												<div class="product-thumb">
+													<a class="d-block" th:href="product-details"> <img
+															src="assets/images/shop/6.webp" width="370" height="450"
+															alt="Image-HasTech">
+													</a> <span class="flag-new">new</span>
+													<div class="product-action">
+														<button type="button"
+															class="product-action-btn action-btn-quick-view"
+															data-bs-toggle="modal"
+															data-bs-target="#action-QuickViewModal">
+															<i class="fa fa-expand"></i>
+														</button>
+														<button type="button" class="product-action-btn action-btn-cart"
+															data-bs-toggle="modal"
+															data-bs-target="#action-CartAddModal">
+															<span>Add to cart</span>
+														</button>
+														<button type="button"
+															class="product-action-btn action-btn-wishlist"
+															data-bs-toggle="modal"
+															data-bs-target="#action-WishlistModal">
+															<i class="fa fa-heart-o"></i>
+														</button>
+													</div>
+												</div>
+												<div class="product-info">
+													<div class="product-rating">
+														<div class="rating">
+															<i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
+															<i class="fa fa-star-half-o"></i>
+														</div>
+														<div class="reviews">150 reviews</div>
+													</div>
+													<h4 class="title">
+														<a th:href="product-details">Readable content DX22</a>
+													</h4>
+													<div class="prices">
+														<span class="price">$210.00</span> <span
+															class="price-old">300.00</span>
+													</div>
+												</div>
+											</div>
+											<!--== End prPduct Item ==-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!--== End Product Area Wrapper ==-->
+
+			</main>
+
+		</div>
+	</section>
+</body>
+<script src="./assets/js/vendor/modernizr-3.11.7.min.js"></script>
+<script src="./assets/js/vendor/jquery-3.6.0.min.js"></script>
+<script src="./assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
+<script src="./assets/js/vendor/bootstrap.bundle.min.js"></script>
+
+<!-- Plugins JS -->
+<script src="./assets/js/plugins/swiper-bundle.min.js"></script>
+<script src="./assets/js/plugins/fancybox.min.js"></script>
+<script src="./assets/js/plugins/jquery.nice-select.min.js"></script>
+
+<!-- Custom Main JS -->
+<script src="./assets/js/main.js"></script>
+</html>
